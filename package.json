@@ -1,0 +1,32 @@
+{
+  "name": "charts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lemoncode/charts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lemoncode/charts/issues"
+  },
+  "homepage": "https://github.com/Lemoncode/charts#readme",
+  "dependencies": {
+    "next": "^9.3.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.1",
+    "@types/react": "^16.9.34",
+    "typescript": "^3.8.3"
+  }
+}
