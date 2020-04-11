@@ -4,7 +4,7 @@ export default function Index() {
   return (
     <div>
       <p>Página principal gráficas</p>
-      <Link href="/spain-covid-chart">
+      <Link href="/españa-covid-marzo">
         <a>Covid España Marzo 2020</a>
       </Link>
     </div>
