@@ -11,7 +11,7 @@ export const MainChartListComponent: React.FC = () => {
       <Typography variant="h6" gutterBottom>
         Use a card here: Add the title + link, picture and description and chart
       </Typography>
-      <Link href="/españa-covid-marzo">
+      <Link href="/espana-covid-marzo">
         <a>
           <Typography variant="body1" gutterBottom>
             Covid España Marzo 2020
