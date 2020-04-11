@@ -1,12 +1,15 @@
 import Link from "next/link";
+import Typography from "@material-ui/core/Typography";
+import { MainChartListContainer } from "../pods/main-chart-list";
 
 export default function Index() {
   return (
     <div>
-      <p>Página principal gráficas</p>
-      <Link href="/españa-covid-marzo">
-        <a>Covid España Marzo 2020</a>
-      </Link>
+      <Typography variant="h2" gutterBottom>
+        Página principal gráficas
+      </Typography>
+
+      <MainChartListContainer />
     </div>
   );
 }
