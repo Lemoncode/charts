@@ -7,6 +7,8 @@ export default function SpainCovidChart() {
 
   // This could be moved outside the component
   // is just pure d3js
+  // we could move it spain-covid-chart.d3.tsx
+  // By using this approach we isolate the d3 chart creation
   const createChart = (svg: SVGSVGElement) => {
     d3.select(svg).append("circle").attr("r", 20).attr("cx", 20).attr("cy", 20);
   };
