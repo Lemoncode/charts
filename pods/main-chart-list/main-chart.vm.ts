@@ -5,9 +5,9 @@ export interface ChartInfoVm {
   chartPageRoute: string;
 }
 
-export const createEmptyChart = (): ChartInfoVm => ({
-  title: "",
-  description: "",
-  picture: "",
+export const createDefaultSampleChart = (): ChartInfoVm => ({
+  title: "Sample chart",
+  description: "Sample description of this chart",
+  picture: "static/images/default_chart.png",
   chartPageRoute: "",
 });
