@@ -4,3 +4,10 @@ export interface ChartInfoVm {
   picture: string; // url
   chartPageRoute: string;
 }
+
+export const createEmptyChart = (): ChartInfoVm => ({
+  title: "",
+  description: "",
+  picture: "",
+  chartPageRoute: "",
+});
