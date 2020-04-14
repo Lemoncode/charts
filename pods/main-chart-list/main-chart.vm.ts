@@ -9,5 +9,5 @@ export const createDefaultSampleChart = (): ChartInfoVm => ({
   title: "Sample chart",
   description: "Sample description of this chart",
   picture: "static/images/default_chart.png",
-  chartPageRoute: "",
+  chartPageRoute: "espana-covid-marzo",
 });
