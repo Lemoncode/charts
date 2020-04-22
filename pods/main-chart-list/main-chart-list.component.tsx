@@ -1,23 +1,23 @@
-import Link from "next/link";
-import Typography from "@material-ui/core/Typography";
+import { ChartInfoVm } from "./main-chart.vm";
+import { ChartInfoCard } from "./components";
+import React from "react";
+import { GridLayout } from "../../layouts";
 
 // TODO: Define interface props it should pass down the list
 // of charts
-export const MainChartListComponent: React.FC = () => {
-  // TODO: use a map to iterate through each chart
-  // TODO: Create a ChartInfo Card subcomponent
+interface Props {
+  chartsInfoCollection: ChartInfoVm[],
+}
+
+export const MainChartListComponent: React.FC<Props> = (props: Props) => {
+  const { chartsInfoCollection } = props;
   return (
-    <>
-      <Typography variant="h6" gutterBottom>
-        Use a card here: Add the title + link, picture and description and chart
-      </Typography>
-      <Link href="/espana-covid-marzo">
-        <a>
-          <Typography variant="body1" gutterBottom>
-            Covid España Marzo 2020
-          </Typography>
-        </a>
-      </Link>
-    </>
+    <GridLayout>
+      {
+        chartsInfoCollection.map((chartInfo, index) =>
+          <ChartInfoCard chartInfo={chartInfo} key={index} />
+        )
+      }
+    </GridLayout>
   );
 };
