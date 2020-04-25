@@ -58,9 +58,12 @@ const drawCircles = (map, affectedRadiusScale, mapProjection) => {
     .enter()
     .append("circle")
     .attr("class", "affected-marker")
-    .attr("r", d => calculateRadiusBasedOnAffectedCases(d.name, affectedRadiusScale))
+    .attr("r", 0)
     .attr("cx", d => mapProjection([d.long, d.lat])[0])
-    .attr("cy", d => mapProjection([d.long, d.lat])[1]);
+    .attr("cy", d => mapProjection([d.long, d.lat])[1])
+    .transition()
+    .attr("r", d => calculateRadiusBasedOnAffectedCases(d.name, affectedRadiusScale))
+    .duration(2000);
 }
 
 export const createChart = (svg: SVGSVGElement) => {
