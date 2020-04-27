@@ -1,21 +1,24 @@
-import * as d3 from "d3";
+import { geoPath } from "d3-geo";
+import { scaleLinear } from "d3-scale";
+import { select, selectAll } from "d3-selection";
+import  "d3-transition";
+
 import * as topojson from "topojson-client";
 const spainjson = require("./spain.json");
 const d3Composite = require("d3-composite-projections");
 import { latLongCommunities } from "./communities";
 import { stats } from "./stats";
 import { svgDimensions, maxRelativeRadius, 
-         mapProjectionProps, minRadius } from "./espana-covid-marzo.config";
+         mapProjectionProps, minRadius, svgBackgroundColor } from "./espana-covid-marzo.config";
 
 const getMaxAffected = () => {
     return stats.reduce((max, item) => (item.value > max ? item.value : max),0);
 }
 
 const getAffectedRadiusScale = () => {
-    return d3
-            .scaleLinear()
-            .domain([0, getMaxAffected()])
-            .range([0, svgDimensions.height/maxRelativeRadius]);
+    return scaleLinear()
+           .domain([0, getMaxAffected()])
+           .range([0, svgDimensions.height/maxRelativeRadius]);
 }
 
 const calculateRadiusBasedOnAffectedCases = (comunidad: string, affectedRadiusScale: any) => {
@@ -34,21 +37,20 @@ const getMapProjection = () => {
 }
 
 const setUpMap = () => {
-    return d3
-            .select("svg")
-            .attr("width", svgDimensions.width)
-            .attr("height", svgDimensions.height)
-            .attr("style", "background-color: #FBFAF0");
+    return select("svg")
+           .attr("width", svgDimensions.width)
+           .attr("height", svgDimensions.height)
+           .attr("style", `background-color: ${svgBackgroundColor}`);
 }
 
-const drawPaths = (map, geojson, geoPath) => {
+const drawPaths = (map, geojson, geoPathProjection) => {
     map
     .selectAll("path")
     .data(geojson["features"])
     .enter()
     .append("path")
     .attr("class", "country")
-    .attr("d", geoPath as any);
+    .attr("d", geoPathProjection as any);
 }
 
 const drawCircles = (map, affectedRadiusScale, mapProjection) => {
@@ -58,7 +60,7 @@ const drawCircles = (map, affectedRadiusScale, mapProjection) => {
     .enter()
     .append("circle")
     .attr("class", "affected-marker")
-    .attr("r", 0)
+    .attr("r", d => 0)
     .attr("cx", d => mapProjection([d.long, d.lat])[0])
     .attr("cy", d => mapProjection([d.long, d.lat])[1])
     .transition()
@@ -71,7 +73,7 @@ export const createChart = (svg: SVGSVGElement) => {
     const mapProjection = getMapProjection();
 
     //Set up the projection we are going to use
-    const geoPath = d3.geoPath().projection(mapProjection);
+    const geoPathProjection = geoPath().projection(mapProjection);
 
     //Obtain the geojson data from our hardcoded topojson
     const geojson = topojson.feature(spainjson, spainjson.objects.ESP_adm1);
@@ -80,7 +82,7 @@ export const createChart = (svg: SVGSVGElement) => {
     const map = setUpMap();
 
     //Draw the paths
-    drawPaths(map, geojson, geoPath);
+    drawPaths(map, geojson, geoPathProjection);
     
     //Draw the circles
     drawCircles(map, affectedRadiusScale, mapProjection);
