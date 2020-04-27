@@ -11,12 +11,12 @@ export const latLongCommunities = [
   },
   {
     name: "Valencia",
-    long: -0.37739,
+    long: -0.67739,
     lat: 39.45975
   },
   {
     name: "Murcia",
-    long: -1.13004,
+    long: -1.33004,
     lat: 37.98704
   },
   {
@@ -31,8 +31,8 @@ export const latLongCommunities = [
   },
   {
     name: "País Vasco",
-    long: -2.75,
-    lat: 43.0
+    long: -2.55,
+    lat: 43.10
   },
   {
     name: "Cantabria",
@@ -56,8 +56,8 @@ export const latLongCommunities = [
   },
   {
     name: "Castilla y León",
-    long: -4.45,
-    lat: 41.383333
+    long: -4.55,
+    lat: 41.683333
   },
   {
     name: "Castilla La Mancha",
@@ -66,13 +66,13 @@ export const latLongCommunities = [
   },
   {
     name: "Islas Canarias",
-    long: -15.5,
+    long: -15.55,
     lat: 28.0
   },
   {
     name: "Islas Baleares",
-    long: 2.52136,
-    lat: 39.18969
+    long: 2.949722,
+    lat: 39.566667
   },
   {
     name: "Navarra",
@@ -82,6 +82,6 @@ export const latLongCommunities = [
   {
     name: "La Rioja",
     long: -2.445556,
-    lat: 42.465
+    lat: 42.315
   }
 ];
