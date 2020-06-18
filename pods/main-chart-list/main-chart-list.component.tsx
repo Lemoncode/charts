@@ -1,47 +1,32 @@
-import { ChartCardComponent } from "../../components/chartCard.component";
-import { ChartGridLayout } from "../../layouts/chartGrid.layout";
-import { Grid } from "@material-ui/core";
+import React from "react";
+import { Grid, makeStyles, Theme, createStyles } from "@material-ui/core";
+import { ChartInfoCard } from "./components/chart-info-card/chart-info-card";
+import { ChartInfoVm } from "./main-chart.vm";
 
-// TODO: Define interface props it should pass down the list
-// of charts
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    grid: {
+      flexGrow: 1,
+    }
+  })
+);
 
-interface ChartEntity {
-  id: number,
-  title: string;
-  description: string;
-  url: string;
-  thumbnailUrl: string;
+interface Props {
+  chartsInfoCollection: ChartInfoVm[],
 }
 
-export const MainChartListComponent: React.FC = () => {
-  // mockup data
-  const chartsInfo: ChartEntity[] = [
-    {
-      id: 0,
-      title:
-        "Use a card here: Add the title + link, picture and description and chart",
-      description: "Covid España Marzo 2020",
-      url: "/espana-covid-marzo",
-      thumbnailUrl: "",
-    },
-  ];
-
-  // TODO: use a map to iterate through each chart
-  // TODO: Create a ChartInfo Card subcomponent
+export const MainChartListComponent: React.FC<Props> = (props: Props) => {
+  const classes = useStyles(props);
+  const { chartsInfoCollection } = props;
   return (
     <>
-      <ChartGridLayout>
-        {chartsInfo.map((chart: ChartEntity) => (
-          <Grid item key={chart.id}>
-            <ChartCardComponent
-              title={chart.title}
-              description={chart.description}
-              url={chart.url}
-              thumbnailUrl={chart.thumbnailUrl}
-            />
+      <Grid container spacing={3} className={classes.grid}>
+        {chartsInfoCollection.map((chartInfo: ChartInfoVm, index) => (
+          <Grid item key={index} xs>
+            <ChartInfoCard chartInfo={chartInfo} />
           </Grid>
         ))}
-      </ChartGridLayout>
+      </Grid>
     </>
   );
 };
