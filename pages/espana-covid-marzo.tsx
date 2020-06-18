@@ -1,7 +1,7 @@
 import * as React from "react";
-import Link from "next/link";
 import * as d3 from "d3";
-import { HeaderLayout, BodyLayout, MainLayout, FooterLayout } from "../layouts";
+import Link from "next/link";
+import { HeaderLayout, AppLayout, MainLayout, FooterLayout } from "../layouts";
 import { HeaderComponent, FooterComponent } from "../components";
 import { Typography } from "@material-ui/core";
 
@@ -21,12 +21,9 @@ export default function SpainCovidChart() {
   }, []);
 
   return (
-    <BodyLayout>
+    <AppLayout>
       <HeaderLayout>
-        <HeaderComponent />
-        <Typography variant="h2" component="h2" gutterBottom>
-          Add here the description and chart
-        </Typography>
+        <HeaderComponent title="Covid Marzo 2020"/>
       </HeaderLayout>
       <MainLayout>
         <svg
@@ -34,6 +31,9 @@ export default function SpainCovidChart() {
           width="500"
           height="500"
         ></svg>
+        <Typography variant="body1" component="p" gutterBottom>
+          Add here the description and chart
+        </Typography>
         <Link href="/index">
           <a>Volver a página principal</a>
         </Link>
@@ -41,6 +41,6 @@ export default function SpainCovidChart() {
       <FooterLayout>
         <FooterComponent />
       </FooterLayout>
-    </BodyLayout>
+    </AppLayout>
   );
 }

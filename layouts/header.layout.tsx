@@ -1,13 +1,14 @@
 import * as React from "react";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
-      padding: `1.5rem`,
+      gridArea: "header",
       textAlign: "center",
-      backgroundColor: "black",
-      color: "white",
+      padding: "1rem",
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.background.default,
     },
   })
 );

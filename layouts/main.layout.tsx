@@ -4,13 +4,8 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
-      backgroundColor: "white",
-      color: "black",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "flex-start",
-      alignContent: "stretch",
-      flexGrow: 1
+      gridArea: "main",
+      padding: "2rem",
     }
   })
 );

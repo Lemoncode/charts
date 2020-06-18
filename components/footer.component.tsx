@@ -1,11 +1,10 @@
 import * as React from "react";
-import { Typography } from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { Typography, makeStyles, createStyles, Theme } from "@material-ui/core";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    link: {
-      color: "grey",
+    footerLink: {
+      color: theme.palette.secondary.main,
     },
   })
 );
@@ -17,7 +16,7 @@ export const FooterComponent = (props: Props) => {
 
   return (
     <Typography variant="subtitle1" component="p">
-      	&copy; 2020. Developed with React
+      &copy; 2020. Developed with React.
     </Typography>
   );
 };
