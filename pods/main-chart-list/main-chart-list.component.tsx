@@ -1,23 +1,32 @@
-import { ChartInfoVm } from "./main-chart.vm";
-import { ChartInfoCard } from "./components";
 import React from "react";
-import { GridLayout } from "../../layouts";
+import { Grid, makeStyles, Theme, createStyles } from "@material-ui/core";
+import { ChartInfoCard } from "./components/chart-info-card/chart-info-card";
+import { ChartInfoVm } from "./main-chart.vm";
 
-// TODO: Define interface props it should pass down the list
-// of charts
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    grid: {
+      flexGrow: 1,
+    }
+  })
+);
+
 interface Props {
   chartsInfoCollection: ChartInfoVm[],
 }
 
 export const MainChartListComponent: React.FC<Props> = (props: Props) => {
+  const classes = useStyles(props);
   const { chartsInfoCollection } = props;
   return (
-    <GridLayout>
-      {
-        chartsInfoCollection.map((chartInfo, index) =>
-          <ChartInfoCard chartInfo={chartInfo} key={index} />
-        )
-      }
-    </GridLayout>
+    <>
+      <Grid container spacing={3} className={classes.grid}>
+        {chartsInfoCollection.map((chartInfo: ChartInfoVm, index) => (
+          <Grid item key={index} xs>
+            <ChartInfoCard chartInfo={chartInfo} />
+          </Grid>
+        ))}
+      </Grid>
+    </>
   );
 };

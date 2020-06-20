@@ -1,6 +1,9 @@
 import * as React from "react";
-import Link from "next/link";
 import * as d3 from "d3";
+import Link from "next/link";
+import { HeaderLayout, AppLayout, MainLayout, FooterLayout } from "../layouts";
+import { HeaderComponent, FooterComponent } from "../components";
+import { Typography } from "@material-ui/core";
 
 export default function SpainCovidChart() {
   const refSvgDomNode = React.useRef<SVGSVGElement>(null);
@@ -18,17 +21,26 @@ export default function SpainCovidChart() {
   }, []);
 
   return (
-    <div>
-      <p>Add here the description and chart</p>
-
-      <svg
-        ref={(node) => (refSvgDomNode.current = node)}
-        width="500"
-        height="500"
-      ></svg>
-      <Link href="/index">
-        <a>Volver a página principal</a>
-      </Link>
-    </div>
+    <AppLayout>
+      <HeaderLayout>
+        <HeaderComponent title="Covid Marzo 2020"/>
+      </HeaderLayout>
+      <MainLayout>
+        <svg
+          ref={(node) => (refSvgDomNode.current = node)}
+          width="500"
+          height="500"
+        ></svg>
+        <Typography variant="body1" component="p" gutterBottom>
+          Add here the description and chart
+        </Typography>
+        <Link href="/index">
+          <a>Volver a página principal</a>
+        </Link>
+      </MainLayout>
+      <FooterLayout>
+        <FooterComponent />
+      </FooterLayout>
+    </AppLayout>
   );
 }
