@@ -1,59 +1,48 @@
-import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import { ChartInfoVm } from '../../main-chart.vm';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+import * as React from "react";
 import Link from "next/link";
+import { Card, CardContent, CardActions, Button, makeStyles, Theme, createStyles, Typography } from "@material-ui/core";
+import { ChartInfoVm } from "../../main-chart.vm";
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    gridCell: {
+      // maxWidth: "18.75rem",
+      // margin: "2rem",
+    },
+  })
+);
 
 interface Props {
   chartInfo: ChartInfoVm
 }
 
 export const ChartInfoCard = (props: Props) => {
+  const classes = useStyles(props);
   const { chartInfo } = props;
 
   return (
-    <>
-      <Card className="card-width">
-        <CardActionArea>
-          <ChartInfo chartInfo={chartInfo} />
-        </CardActionArea>
-      </Card>
-      <style jsx global>
-        {`
-          .card-width{
-            max-width: 18.75rem;
-            margin: 2rem;
-          }
-      `}
-      </style>
-    </>
-  )
-}
-
-const ChartInfo = (props: Props) => {
-  const { chartInfo } = props;
-
-  return (
-    <>
-      <Link href={chartInfo.chartPageRoute}>
+    <React.Fragment>
+      <Card className={classes.gridCell}>
         <CardContent>
-          <CardMedia
-            component="img"
-            alt={chartInfo.title}
-            image={chartInfo.picture}
-            title={chartInfo.title}
-          />
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography variant="h6" component="h2" gutterBottom>
             {chartInfo.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" component="p">
             {chartInfo.description}
           </Typography>
         </CardContent>
-      </Link>
-    </>
+        <CardActions>
+          <Button size="small">
+            <Link href={chartInfo.chartPageRoute}>
+              <a>
+                <Typography variant="body1" gutterBottom>
+                  Ir a gráfica
+                </Typography>
+              </a>
+            </Link>
+          </Button>
+        </CardActions>
+      </Card>
+    </React.Fragment>
   );
 }
