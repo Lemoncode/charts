@@ -4,6 +4,9 @@ import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../layouts/app.layout.styles';
+//Refactor this
+import '../pods/covid-spain-chart/base.css'
+import '../pods/covid-spain-chart/map.css'
 
 export default function App(props) {
   const { Component, pageProps } = props;
