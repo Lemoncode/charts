@@ -1,7 +1,7 @@
-import { ChartInfoVm, createDefaultSampleChart } from "./main-chart.vm";
+import { ChartInfoVm, createDefaultSampleChart, createSpainPopulationChart } from "./main-chart.vm";
 
 export const mainChartList: ChartInfoVm[] = [
   createDefaultSampleChart(),
   createDefaultSampleChart(),
-  createDefaultSampleChart(),
+  createSpainPopulationChart(),
 ];
