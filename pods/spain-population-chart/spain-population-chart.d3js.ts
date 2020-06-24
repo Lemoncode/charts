@@ -7,38 +7,51 @@ import {
   svgDimensions,
   svgBackgroundColor,
   mapProjectionProps,
-  provinceStyle,
-  selectedProvinceStyle,
-  messagesStyle,
-  rectangleProps
+  messagesProps,
+  rectangleProps,
 } from "./spain-population-chart.config";
+import styles from "./map.module.css";
 
 const maxPopulation = (provincesPopulation: ProvincePopulation[]): number => {
   return provincesPopulation.reduce(
     (max, item) => (item.population > max ? item.population : max),
     0
   );
-}
+};
 
-const getProvincePopulation = (province: string, provincesPopulation: ProvincePopulation[]): number => {
+const getProvincePopulation = (
+  province: string,
+  provincesPopulation: ProvincePopulation[]
+): number => {
   const res = provincesPopulation.find((p) => p.provinceName === province);
-  if(res) return res.population;
+  if (res) return res.population;
   return 0;
-}
+};
 
-const getColor = (d: any, provincesPopulation: ProvincePopulation[], colorScale: d3.ScaleSequential<string>) => {
+const getColor = (
+  d: any,
+  provincesPopulation: ProvincePopulation[],
+  colorScale: d3.ScaleSequential<string>
+) => {
   const province = d.properties.NAME_2;
   const res = provincesPopulation.find((p) => p.provinceName === province);
-  if(!res) {console.log(d.properties.NAME_2); return "#ffffff";}
+  if (!res) {
+    console.log(d.properties.NAME_2);
+    return "#ffffff";
+  }
   return colorScale(res.population);
 };
 
 const generateColorScale = (provincesPopulation: ProvincePopulation[]) => {
-  return d3.scaleSequential(d3.interpolateReds)
+  return d3
+    .scaleSequential(d3.interpolateReds)
     .domain([0, maxPopulation(provincesPopulation)]);
 };
 
-export const createChart = (svgElement: SVGSVGElement, provincesPopulation: ProvincePopulation[]) => {
+export const createChart = (
+  svgElement: SVGSVGElement,
+  provincesPopulation: ProvincePopulation[]
+) => {
   const colorScale = generateColorScale(provincesPopulation);
 
   const svg = d3
@@ -51,7 +64,7 @@ export const createChart = (svgElement: SVGSVGElement, provincesPopulation: Prov
     .geoConicConformalSpain()
     .scale(mapProjectionProps.scale)
     .translate(mapProjectionProps.translation);
-  
+
   const geoPath = d3.geoPath().projection(aProjection);
   const geojson = topojson.feature(spainjson, spainjson.objects.ESP_adm2);
 
@@ -60,39 +73,36 @@ export const createChart = (svgElement: SVGSVGElement, provincesPopulation: Prov
     .data(geojson["features"])
     .enter()
     .append("path")
-    .attr("stroke", provinceStyle.stroke)
-    .attr("stroke-width", provinceStyle.strokeWidth)
-    .attr("fill", provinceStyle.fill)
+    .attr("class", styles.province)
     .attr("d", geoPath as any)
-    .style("fill", d => getColor(d, provincesPopulation, colorScale))
-    .on("mouseover", function(d, i) {
-      d3.select(this).attr("stroke", selectedProvinceStyle.stroke);
-      d3.select(this).attr("stroke-width", selectedProvinceStyle.strokeWidth);
-      d3.select(this).attr("fill", selectedProvinceStyle.fill);
+    .style("fill", (d) => getColor(d, provincesPopulation, colorScale))
+    .on("mouseover", function (d, i) {
+      d3.select(this).attr("class", styles["selected-province"]);
       svg
         .append("text")
-        .attr("x", messagesStyle.x)
-        .attr("y", messagesStyle.y_first)
-        .attr("font-size", messagesStyle.fontSize)
-        .attr("font-weight", messagesStyle.fontWeight)
+        .attr("x", messagesProps.x)
+        .attr("y", messagesProps.y_first)
+        .attr("class", styles.messages)
         .text(`Province: ${(d as any).properties.NAME_2}`);
-        
+
       svg
         .append("text")
-        .attr("x", messagesStyle.x)
-        .attr("y", messagesStyle.y_second)
-        .attr("font-size", messagesStyle.fontSize)
-        .attr("font-weight", messagesStyle.fontWeight)
-        .text(`Population: ${getProvincePopulation((d as any).properties.NAME_2, provincesPopulation)}`);
+        .attr("x", messagesProps.x)
+        .attr("y", messagesProps.y_second)
+        .attr("class", styles.messages)
+        .text(
+          `Population: ${getProvincePopulation(
+            (d as any).properties.NAME_2,
+            provincesPopulation
+          )}`
+        );
     })
-    .on("mouseout", function(d, i) {
-      d3.select(this).attr("stroke", provinceStyle.stroke);
-      d3.select(this).attr("stroke-width", provinceStyle.strokeWidth);
-      d3.select(this).attr("fill", provinceStyle.fill);
+    .on("mouseout", function (d, i) {
+      d3.select(this).attr("class", styles.province);
       d3.select("svg text").remove();
       d3.select("svg text").remove();
     });
-  
+
   svg
     .append("rect")
     .attr("rx", rectangleProps.rx)
@@ -101,6 +111,5 @@ export const createChart = (svgElement: SVGSVGElement, provincesPopulation: Prov
     .attr("y", rectangleProps.y)
     .attr("width", rectangleProps.width)
     .attr("height", rectangleProps.height)
-    .attr("stroke", rectangleProps.stroke)
-    .attr('fill', rectangleProps.fill);
-}
+    .attr("class", styles["messages-rectangle"]);
+};
