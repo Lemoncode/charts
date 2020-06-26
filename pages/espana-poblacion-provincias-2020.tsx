@@ -1,20 +1,30 @@
-  
 import * as React from "react";
 import Link from "next/link";
 import { SpainPopulationChartContainer } from "../pods/spain-population-chart";
 import { HeaderLayout, AppLayout, MainLayout, FooterLayout } from "../layouts";
 import { HeaderComponent, FooterComponent } from "../components";
+import {
+  ChartInfoVm,
+  createSpainPopulationChart,
+} from "../pods/main-chart-list/main-chart.vm";
+import { ChartInfoComponent } from "../common-app";
 
 export default function SpainCovidChart() {
+  const [chartInfo, setChartInfo] = React.useState<ChartInfoVm>(
+    createSpainPopulationChart()
+  );
+
   return (
     <AppLayout>
       <HeaderLayout>
-        <HeaderComponent title="Spain population by provinces 2020" />
+        <HeaderComponent title={chartInfo.title} />
       </HeaderLayout>
       <MainLayout>
-        <p>
-          Spain population by provinces (data updated on 1st January 2020)
-        </p>
+        <ChartInfoComponent
+          description={chartInfo.longDescription}
+          source={chartInfo.source}
+          tags={chartInfo.tags}
+        />
         <div>
           <SpainPopulationChartContainer />
         </div>

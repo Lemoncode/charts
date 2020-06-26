@@ -83,7 +83,7 @@ export const createChart = (
         .attr("x", messagesProps.x)
         .attr("y", messagesProps.y_first)
         .attr("class", styles.messages)
-        .text(`Province: ${(d as any).properties.NAME_2}`);
+        .text(`Provincia: ${(d as any).properties.NAME_2}`);
 
       svg
         .append("text")
@@ -91,7 +91,7 @@ export const createChart = (
         .attr("y", messagesProps.y_second)
         .attr("class", styles.messages)
         .text(
-          `Population: ${getProvincePopulation(
+          `Población: ${getProvincePopulation(
             (d as any).properties.NAME_2,
             provincesPopulation
           )}`

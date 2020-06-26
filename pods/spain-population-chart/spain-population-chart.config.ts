@@ -1,28 +1,28 @@
 export const svgDimensions = {
-  width: 1024,
-  height: 800,
+  width: 800,
+  height: 600,
 };
 
 export const svgBackgroundColor = "#FBFAF0";
 
 export const mapProjectionProps = {
-  scale: 3300,
-  translation: [500, 400],
+  scale: 3000,
+  translation: [400, 300],
 };
 
 export const messagesProps = {
-  x: 120,
-  y_first: 320,
-  y_second: 350,
+  x: 80,
+  y_first: 250,
+  y_second: 270,
 };
 
 export const rectangleProps = {
   rx: 6,
   ry: 6,
-  x: 110,
-  y: 300,
+  x: 70,
+  y: 230,
   width: 215,
-  height: 60,
+  height: 50,
   stroke: "black",
   fill: "white",
 };
