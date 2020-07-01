@@ -1,7 +1,16 @@
 import * as React from "react";
 import Link from "next/link";
-import { Card, CardContent, CardActions, Button, makeStyles, Theme, createStyles, Typography } from "@material-ui/core";
-import { ChartInfoVm } from "../../main-chart.vm";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  makeStyles,
+  Theme,
+  createStyles,
+  Typography,
+} from "@material-ui/core";
+import { ChartInfoVm } from "../../core/model";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,10 +22,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  chartInfo: ChartInfoVm
+  chartInfo: ChartInfoVm;
 }
 
-export const ChartInfoCard = (props: Props) => {
+export const ChartCardComponent: React.FC<Props> = (props: Props) => {
   const classes = useStyles(props);
   const { chartInfo } = props;
 
@@ -28,12 +37,12 @@ export const ChartInfoCard = (props: Props) => {
             {chartInfo.title}
           </Typography>
           <Typography variant="body2" component="p">
-            {chartInfo.description}
+            {chartInfo.shortDescription}
           </Typography>
         </CardContent>
         <CardActions>
           <Button size="small">
-            <Link href={chartInfo.chartPageRoute}>
+            <Link href={chartInfo.chartPath}>
               <a>
                 <Typography variant="body1" gutterBottom>
                   Ir a gráfica
@@ -45,4 +54,4 @@ export const ChartInfoCard = (props: Props) => {
       </Card>
     </React.Fragment>
   );
-}
+};

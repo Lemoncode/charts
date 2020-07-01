@@ -1,32 +1,32 @@
 import React from "react";
 import { Grid, makeStyles, Theme, createStyles } from "@material-ui/core";
-import { ChartInfoCard } from "./components/chart-info-card/chart-info-card";
-import { ChartInfoVm } from "./main-chart.vm";
+import { ChartCardComponent } from "../../components/charts/chart-card.component";
+import { ChartInfoVm } from "../../core/model/charts.vm";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grid: {
       flexGrow: 1,
-    }
+    },
   })
 );
 
 interface Props {
-  chartsInfoCollection: ChartInfoVm[],
+  chartsInfoCollection: ChartInfoVm[];
 }
 
 export const MainChartListComponent: React.FC<Props> = (props: Props) => {
   const classes = useStyles(props);
   const { chartsInfoCollection } = props;
   return (
-    <>
+    <React.Fragment>
       <Grid container spacing={3} className={classes.grid}>
         {chartsInfoCollection.map((chartInfo: ChartInfoVm, index) => (
           <Grid item key={index} xs>
-            <ChartInfoCard chartInfo={chartInfo} />
+            <ChartCardComponent chartInfo={chartInfo} />
           </Grid>
         ))}
       </Grid>
-    </>
+    </React.Fragment>
   );
 };
