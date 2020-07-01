@@ -9,6 +9,7 @@ import {
   mapProjectionProps,
   messagesProps,
   rectangleProps,
+  legendProps,
 } from "./spain-population-chart.config";
 import styles from "./map.module.css";
 
@@ -23,7 +24,7 @@ const getProvincePopulation = (
   province: string,
   provincesPopulation: ProvincePopulation[]
 ): number => {
-  const res = provincesPopulation.find((p) => p.provinceName === province);
+  const res = provincesPopulation.find((p) => p.province === province);
   if (res) return res.population;
   return 0;
 };
@@ -34,7 +35,7 @@ const getColor = (
   colorScale: d3.ScaleSequential<string>
 ) => {
   const province = d.properties.NAME_2;
-  const res = provincesPopulation.find((p) => p.provinceName === province);
+  const res = provincesPopulation.find((p) => p.province === province);
   if (!res) {
     console.log(d.properties.NAME_2);
     return "#ffffff";
@@ -46,6 +47,48 @@ const generateColorScale = (provincesPopulation: ProvincePopulation[]) => {
   return d3
     .scaleSequential(d3.interpolateReds)
     .domain([0, maxPopulation(provincesPopulation)]);
+};
+
+const displayLegend = (
+  svg: d3.Selection<d3.BaseType, unknown, HTMLElement, any>,
+  posX: number,
+  posY: number,
+  province: string,
+  population: number
+) => {
+  svg
+    .append("rect")
+    .attr("rx", rectangleProps.rx)
+    .attr("ry", rectangleProps.ry)
+    .attr("x", posX - legendProps.x_offset)
+    .attr("y", posY - legendProps.y_offset)
+    .attr(
+      "width",
+      province === "Santa Cruz de Tenerife"
+        ? rectangleProps.sct_width
+        : rectangleProps.width
+    )
+    .attr("height", rectangleProps.height)
+    .attr("class", styles["messages-rectangle"]);
+
+  svg
+    .append("text")
+    .attr("x", posX + messagesProps.x - legendProps.x_offset)
+    .attr("y", posY + messagesProps.y_first - legendProps.y_offset)
+    .attr("class", styles.messages)
+    .text(`Provincia: ${province}`);
+
+  svg
+    .append("text")
+    .attr("x", posX + messagesProps.x - legendProps.x_offset)
+    .attr("y", posY + messagesProps.y_second - legendProps.y_offset)
+    .attr("class", styles.messages)
+    .text(`Habitantes: ${population}`);
+};
+
+const hideLegend = () => {
+  d3.selectAll("rect").remove();
+  d3.selectAll("text").remove();
 };
 
 export const createChart = (
@@ -68,6 +111,8 @@ export const createChart = (
   const geoPath = d3.geoPath().projection(aProjection);
   const geojson = topojson.feature(spainjson, spainjson.objects.ESP_adm2);
 
+  let province = "";
+  let population = 0;
   svg
     .selectAll("path")
     .data(geojson["features"])
@@ -76,40 +121,26 @@ export const createChart = (
     .attr("class", styles.province)
     .attr("d", geoPath as any)
     .style("fill", (d) => getColor(d, provincesPopulation, colorScale))
+    .on("mousemove", function () {
+      hideLegend();
+      displayLegend(
+        svg,
+        d3.mouse(this)[0],
+        d3.mouse(this)[1],
+        province,
+        population
+      );
+    })
     .on("mouseover", function (d, i) {
       d3.select(this).attr("class", styles["selected-province"]);
-      svg
-        .append("text")
-        .attr("x", messagesProps.x)
-        .attr("y", messagesProps.y_first)
-        .attr("class", styles.messages)
-        .text(`Provincia: ${(d as any).properties.NAME_2}`);
-
-      svg
-        .append("text")
-        .attr("x", messagesProps.x)
-        .attr("y", messagesProps.y_second)
-        .attr("class", styles.messages)
-        .text(
-          `Población: ${getProvincePopulation(
-            (d as any).properties.NAME_2,
-            provincesPopulation
-          )}`
-        );
+      province = (d as any).properties.NAME_2;
+      population = getProvincePopulation(
+        (d as any).properties.NAME_2,
+        provincesPopulation
+      );
     })
     .on("mouseout", function (d, i) {
       d3.select(this).attr("class", styles.province);
-      d3.select("svg text").remove();
-      d3.select("svg text").remove();
+      hideLegend();
     });
-
-  svg
-    .append("rect")
-    .attr("rx", rectangleProps.rx)
-    .attr("ry", rectangleProps.ry)
-    .attr("x", rectangleProps.x)
-    .attr("y", rectangleProps.y)
-    .attr("width", rectangleProps.width)
-    .attr("height", rectangleProps.height)
-    .attr("class", styles["messages-rectangle"]);
 };

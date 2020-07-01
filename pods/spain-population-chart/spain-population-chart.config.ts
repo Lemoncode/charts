@@ -11,18 +11,22 @@ export const mapProjectionProps = {
 };
 
 export const messagesProps = {
-  x: 80,
-  y_first: 250,
-  y_second: 270,
+  x: 10,
+  y_first: 20,
+  y_second: 40,
 };
 
 export const rectangleProps = {
   rx: 6,
   ry: 6,
-  x: 70,
-  y: 230,
-  width: 215,
+  width: 150,
+  sct_width: 215,
   height: 50,
   stroke: "black",
   fill: "white",
+};
+
+export const legendProps = {
+  x_offset: 50,
+  y_offset: 52,
 };

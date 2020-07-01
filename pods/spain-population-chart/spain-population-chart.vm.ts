@@ -1,4 +1,5 @@
 export interface ProvincePopulation {
-  provinceName: string;
+  province: string;
+  label: string;
   population: number;
 }
