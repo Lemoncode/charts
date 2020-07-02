@@ -51,7 +51,7 @@ export const ChartInfoComponent = (props: Props) => {
               className={classes.chip}
               label={value}
               onClick={($event) => handleClick(value)}
-              variant="outlined"
+              color="primary"
             />
           </li>
         ))}

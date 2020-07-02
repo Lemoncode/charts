@@ -8,11 +8,13 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content: {
       display: "flex",
+      flexWrap: "wrap",
       padding: theme.spacing(0.5),
       margin: 0,
     },
     svg: {
-      marginRight: theme.spacing(3),
+      flexGrow: 1,
+      marginRight: theme.spacing(1),
     },
   })
 );

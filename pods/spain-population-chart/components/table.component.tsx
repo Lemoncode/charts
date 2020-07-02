@@ -47,8 +47,8 @@ function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     table: {
-      //minWidth: 325,
       maxHeight: 600,
+      flex: "99 0 300px",
     },
   })
 );
