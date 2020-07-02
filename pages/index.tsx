@@ -1,10 +1,13 @@
 import React from "react";
-import { MainChartListContainer, getAllCharts } from "../pods/main-chart-list";
-import { AppLayout, HeaderLayout, FooterLayout, MainLayout } from "../layouts";
-import { FooterComponent, HeaderComponent } from "../components";
+import { MainChartListContainer } from "pods/main-chart-list";
+import { AppLayout, HeaderLayout, FooterLayout, MainLayout } from "layouts";
+import { FooterComponent, HeaderComponent } from "common-app/components";
+import { getAllCharts } from "core/api";
 
 export default function Index() {
-  const [chartsInfoCollection, setChartsInfoCollection] = React.useState(getAllCharts());
+  const [chartsInfoCollection, setChartsInfoCollection] = React.useState(
+    getAllCharts()
+  );
 
   return (
     <AppLayout>
