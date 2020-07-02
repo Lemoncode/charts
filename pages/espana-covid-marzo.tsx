@@ -1,6 +1,6 @@
 import * as React from "react";
 import { EspanaCovidMarzoContainer } from "pods/covid-spain-chart";
-import { ChartPageComponent } from "components";
+import { ChartPageComponent } from "common-app/components";
 
 interface Props {
   chartPagePath: string;

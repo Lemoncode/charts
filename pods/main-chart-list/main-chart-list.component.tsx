@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, makeStyles, Theme, createStyles } from "@material-ui/core";
-import { ChartCardComponent } from "components/charts/chart-card.component";
+import { ChartCardComponent } from "common-app/components/charts/chart-card.component";
 import { ChartInfoVm } from "core/model/charts.vm";
 
 const useStyles = makeStyles((theme: Theme) =>
