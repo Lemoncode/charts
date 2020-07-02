@@ -1,7 +1,7 @@
 import * as React from "react";
-import { ChartInfoVm, createDefaultSampleChart } from "../../core/model";
-import { getChartByPagePath } from "../../core";
-import { ChartPageLayout } from "../../layouts";
+import { ChartInfoVm, createDefaultSampleChart } from "core/model";
+import { getChartByPagePath } from "core";
+import { ChartPageLayout } from "layouts";
 
 interface Props {
   chartPagePath: string;

@@ -1,7 +1,7 @@
 import Typography from "@material-ui/core/Typography";
 import { MainChartListComponent } from "./main-chart-list.component";
 import React from "react";
-import { ChartInfoVm } from "../../core/model";
+import { ChartInfoVm } from "core/model";
 
 interface Props {
   chartsInfoCollection: ChartInfoVm[];

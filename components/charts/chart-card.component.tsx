@@ -10,7 +10,7 @@ import {
   createStyles,
   Typography,
 } from "@material-ui/core";
-import { ChartInfoVm } from "../../core/model";
+import { ChartInfoVm } from "core/model";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

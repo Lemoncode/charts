@@ -1,9 +1,9 @@
 import * as React from "react";
 import Link from "next/link";
 import { makeStyles, Theme, createStyles, Typography } from "@material-ui/core";
-import { ChartInfoVm } from "../core";
+import { ChartInfoVm } from "core";
 import { AppLayout, HeaderLayout, FooterLayout, MainChartPageLayout } from ".";
-import { HeaderComponent, FooterComponent } from "../components";
+import { HeaderComponent, FooterComponent } from "components";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

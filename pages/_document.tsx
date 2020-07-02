@@ -1,7 +1,7 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
-import theme from "../core/themes/default.theme";
+import theme from "core/themes/default.theme";
 
 export default class PreRenderedDocument extends Document {
   render() {

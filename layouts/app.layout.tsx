@@ -1,6 +1,6 @@
 import * as React from "react";
 import { CssBaseline } from "@material-ui/core";
-import { defaultStyle } from "../core/themes/default.theme";
+import { defaultStyle } from "core/themes/default.theme";
 
 interface Props {
   children: any;
