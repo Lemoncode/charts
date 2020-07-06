@@ -16,7 +16,7 @@ export const createDefaultSampleChart = (): ChartInfoVm => ({
   thumbnailUrl: "static/images/default_chart.png",
   chartPath: "/",
   sourceDescription: "Sample source description",
-  sourceUrl: "#",
+  sourceUrl: "https://www.google.es",
   tags: ["example"],
 });
 
@@ -27,7 +27,7 @@ export const createSpainPopulationChart = (): ChartInfoVm => ({
     "Cifras oficiales de población resultantes de la revisión del Padrón municipal español a 1 de enero de 2020." +
     "La intensidad del color rojo indica mayor número de habitantes en dicha provincia, siendo blanco el color" +
     "para las provincias con menos habitantes y el rojo oscuro el color para las provincias con más.",
-  thumbnailUrl: "static/images/default_chart.png",
+  thumbnailUrl: "static/images/esp_pob_prov_2020.png",
   chartPath: "espana-poblacion-provincias-2020",
   sourceDescription: "Instituto Nacional de Estadística",
   sourceUrl: "https://www.ine.es/jaxiT3/Tabla.htm?t=2852",

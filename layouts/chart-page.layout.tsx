@@ -1,6 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { makeStyles, Theme, createStyles, Typography } from "@material-ui/core";
+import Chip from "@material-ui/core/Chip";
 import { ChartInfoVm } from "core";
 import { AppLayout, HeaderLayout, FooterLayout, MainChartPageLayout } from ".";
 import { HeaderComponent, FooterComponent } from "common-app/components";
@@ -56,11 +57,16 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: "1rem",
     },
     tagList: {
-      listStyleType: "none",
+      display: "flex",
+      justifyContent: "left",
+      flexWrap: "wrap",
+      listStyle: "none",
+      padding: theme.spacing(0.5),
       margin: 0,
-      padding: 0,
     },
-    tagElement: {},
+    tagElement: {
+      marginRight: "0.3rem",
+    },
     linkBackMain: {
       margin: "1rem",
       padding: "0.5rem",
@@ -82,6 +88,12 @@ export const ChartPageLayout: React.FC<Props> = (props: Props) => {
   const classes = useStyles(props);
   const { chart } = props;
 
+  const handleClick = (tagname: string) => {
+    /* TODO: When clicked a tag, it will redirect to a page
+            which contains a list of charts with the same tag */
+    console.log(`You clicked tag ${tagname}`);
+  };
+
   return (
     <AppLayout>
       <HeaderLayout>
@@ -102,7 +114,11 @@ export const ChartPageLayout: React.FC<Props> = (props: Props) => {
           <section className={classes.sourceSection}>
             <Typography variant="subtitle2" component="h1">
               Fuente:
-              <a href={chart.sourceUrl} className={classes.sourceLink}>
+              <a
+                className={classes.sourceLink}
+                href={chart.sourceUrl}
+                target="_blank"
+              >
                 {chart.sourceDescription}
               </a>
             </Typography>
@@ -126,12 +142,15 @@ export const ChartPageLayout: React.FC<Props> = (props: Props) => {
           </section>
           <section className={classes.tagsSection}>
             <ul className={classes.tagList}>
-              <li className={classes.tagElement}>#ejemplo</li>
-              {/* TODO: When clicked a tag, it will redirect to a page
-            which contains a list of charts with the same tag */}
-              {chart.tags.map((tag: string) => {
-                <li className={classes.tagElement}>#{tag}</li>;
-              })}
+              {chart.tags.map((tag: string, index: number) => (
+                <li key={index} className={classes.tagElement}>
+                  <Chip
+                    label={"#" + tag}
+                    onClick={($event) => handleClick(tag)}
+                    color="primary"
+                  />
+                </li>
+              ))}
             </ul>
           </section>
         </div>

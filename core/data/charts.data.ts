@@ -14,7 +14,7 @@ export const mainChartList: ChartInfoVm[] = [
     thumbnailUrl: "static/images/espana_covid_marzo.png",
     chartPath: "espana-covid-marzo",
     sourceDescription: "Fuente de covid marzo",
-    sourceUrl: "#",
-    tags: ["covid"],
+    sourceUrl: "https://www.google.es", //Replace it
+    tags: ["españa", "covid", "COVID-19"],
   },
 ];
