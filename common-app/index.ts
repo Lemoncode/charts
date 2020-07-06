@@ -1,1 +1,1 @@
-export * from "./chart-info.component";
+export * from "./components";

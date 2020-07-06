@@ -1,23 +1,6 @@
 import React from "react";
 import { ProvincePopulation } from "./spain-population-chart.vm";
 import { createChart } from "./spain-population-chart.d3js";
-import { TableComponent } from "./components";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    content: {
-      display: "flex",
-      flexWrap: "wrap",
-      padding: theme.spacing(0.5),
-      margin: 0,
-    },
-    svg: {
-      flexGrow: 1,
-      marginRight: theme.spacing(1),
-    },
-  })
-);
 
 interface Props {
   provincesPopulation: ProvincePopulation[];
@@ -28,18 +11,10 @@ export const SpainPopulationChartComponent: React.FC<Props> = (
 ) => {
   const { provincesPopulation } = props;
   const refSvgDomNode = React.useRef<SVGSVGElement>(null);
-  const classes = useStyles(props);
 
   React.useEffect(() => {
     createChart(refSvgDomNode.current, provincesPopulation);
   }, []);
   //Will return the svg node
-  return (
-    <div className={classes.content}>
-      <div className={classes.svg}>
-        <svg ref={(node) => (refSvgDomNode.current = node)}></svg>
-      </div>
-      <TableComponent provincesPopulation={provincesPopulation} />
-    </div>
-  );
+  return <svg ref={(node) => (refSvgDomNode.current = node)}></svg>;
 };
