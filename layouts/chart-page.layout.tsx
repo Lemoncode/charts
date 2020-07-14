@@ -4,6 +4,7 @@ import { makeStyles, Theme, createStyles, Typography } from "@material-ui/core";
 import { ChartInfoVm } from "core";
 import { AppLayout, HeaderLayout, FooterLayout, MainChartPageLayout } from ".";
 import { HeaderComponent, FooterComponent } from "common-app/components";
+import ReactMarkdown from "react-markdown";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,6 +83,20 @@ export const ChartPageLayout: React.FC<Props> = (props: Props) => {
   const classes = useStyles(props);
   const { chart } = props;
 
+  const markdownInfoSection=`
+  ## Título  
+  Datos sobre la gráfica
+  `;
+
+  const markdownDescriptionSection=`
+  # Descripción  
+  ${chart.longDescription}  
+  `;
+
+  const markdownSourceSection=`
+  **Fuente:** [_${chart.sourceDescription}_](${chart.sourceUrl})
+  `;
+
   return (
     <AppLayout>
       <HeaderLayout>
@@ -91,38 +106,13 @@ export const ChartPageLayout: React.FC<Props> = (props: Props) => {
         <div className={classes.root}>
           <section className={classes.chartSection}>{props.children}</section>
           <section className={classes.chartInfoSection}>
-            {/* TODO: Add Markdown support for chart info */}
-            <Typography variant="h6" component="h1">
-              Título
-            </Typography>
-            <Typography variant="subtitle1" component="p">
-              Datos sobre la gráfica
-            </Typography>
+            <ReactMarkdown source={markdownInfoSection}/>
           </section>
           <section className={classes.sourceSection}>
-            <Typography variant="subtitle2" component="h1">
-              Fuente:
-              <a href={chart.sourceUrl} className={classes.sourceLink}>
-                {chart.sourceDescription}
-              </a>
-            </Typography>
+            <ReactMarkdown source={markdownSourceSection}/>
           </section>
           <section className={classes.descriptionSection}>
-            <Typography
-              variant="h4"
-              component="h1"
-              className={classes.descriptionTitle}
-            >
-              Descripción
-            </Typography>
-            {/* TODO: Add Markdown support for description */}
-            <Typography
-              variant="body1"
-              component="p"
-              className={classes.descriptionParagraph}
-            >
-              {chart.longDescription}
-            </Typography>
+            <ReactMarkdown source={markdownDescriptionSection}/>
           </section>
           <section className={classes.tagsSection}>
             <ul className={classes.tagList}>
