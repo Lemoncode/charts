@@ -67,6 +67,10 @@ const useStyles = makeStyles((theme: Theme) =>
     tagElement: {
       marginRight: "0.3rem",
     },
+    chip: {
+      backgroundColor: theme.palette.primary.light,
+      color: theme.palette.background.default,
+    },
     linkBackMain: {
       margin: "1rem",
       padding: "0.5rem",
@@ -145,6 +149,7 @@ export const ChartPageLayout: React.FC<Props> = (props: Props) => {
               {chart.tags.map((tag: string, index: number) => (
                 <li key={index} className={classes.tagElement}>
                   <Chip
+                    className={classes.chip}
                     label={"#" + tag}
                     onClick={($event) => handleClick(tag)}
                     color="primary"

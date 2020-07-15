@@ -21,6 +21,17 @@ const useStyles = makeStyles((theme: Theme) =>
       // maxWidth: "18.75rem",
       // margin: "2rem",
     },
+    cardHeader: {
+      minHeight: "10rem",
+    },
+    media: {
+      height: 0,
+      paddingTop: "100%",
+      marginTop: "30",
+    },
+    source: {
+      minHeight: "4rem",
+    },
     sourceLink: {
       marginLeft: "0.5rem",
     },
@@ -31,14 +42,27 @@ const useStyles = makeStyles((theme: Theme) =>
       listStyle: "none",
       padding: theme.spacing(0.5),
       margin: 0,
+      minHeight: "4.9rem",
     },
     tagElement: {
-      marginRight: "0.3rem",
+      marginTop: "0.2rem",
+      marginRight: "0.2rem",
     },
-    media: {
-      height: 0,
-      paddingTop: "100%", // 16:9
-      marginTop: "30",
+    chip: {
+      backgroundColor: theme.palette.primary.light,
+      color: theme.palette.background.default,
+    },
+    cardActions: {
+      justifyContent: "center",
+    },
+    linkGoChart: {
+      margin: "0.25rem",
+      padding: "0.5rem",
+      alignSelf: "center",
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.background.default,
+      textDecoration: "none",
+      borderRadius: "5px",
     },
   })
 );
@@ -60,17 +84,22 @@ export const ChartCardComponent: React.FC<Props> = (props: Props) => {
   return (
     <React.Fragment>
       <Card className={classes.gridCell}>
-        <CardHeader title={chartInfo.title} />
+        <CardHeader
+          className={classes.cardHeader}
+          title={chartInfo.title}
+          subheader={chartInfo.shortDescription}
+        />
         <CardMedia
           className={classes.media}
           image={chartInfo.thumbnailUrl}
           title={chartInfo.title}
         />
         <CardContent>
-          <Typography variant="body2" component="p">
-            {chartInfo.shortDescription}
-          </Typography>
-          <Typography variant="subtitle2" component="h1">
+          <Typography
+            variant="subtitle1"
+            component="h1"
+            className={classes.source}
+          >
             Fuente:
             <a
               className={classes.sourceLink}
@@ -84,24 +113,22 @@ export const ChartCardComponent: React.FC<Props> = (props: Props) => {
             {chartInfo.tags.map((tag: string, index: number) => (
               <li key={index} className={classes.tagElement}>
                 <Chip
+                  className={classes.chip}
                   label={"#" + tag}
                   onClick={($event) => handleClick(tag)}
-                  color="primary"
                 />
               </li>
             ))}
           </ul>
         </CardContent>
-        <CardActions>
-          <Button size="small">
-            <Link href={chartInfo.chartPath}>
-              <a>
-                <Typography variant="body1" gutterBottom>
-                  Ir a gráfica
-                </Typography>
-              </a>
-            </Link>
-          </Button>
+        <CardActions className={classes.cardActions}>
+          <Link href={chartInfo.chartPath}>
+            <a className={classes.linkGoChart}>
+              <Typography variant="body1">
+                Ver gráfica y más detalles
+              </Typography>
+            </a>
+          </Link>
         </CardActions>
       </Card>
     </React.Fragment>

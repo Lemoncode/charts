@@ -21,8 +21,8 @@ export const createDefaultSampleChart = (): ChartInfoVm => ({
 });
 
 export const createSpainPopulationChart = (): ChartInfoVm => ({
-  title: "España población por provincias",
-  shortDescription: "Población por provincias españolas a 1 de enero de 2020",
+  title: "España población provincias",
+  shortDescription: "Actualizado a 1 de enero de 2020",
   longDescription:
     "Cifras oficiales de población resultantes de la revisión del Padrón municipal español a 1 de enero de 2020." +
     "La intensidad del color rojo indica mayor número de habitantes en dicha provincia, siendo blanco el color" +
