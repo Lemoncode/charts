@@ -86,9 +86,9 @@ export const ChartCardComponent: React.FC<Props> = (props: Props) => {
       <Card className={classes.gridCell}>
         <CardHeader
           className={classes.cardHeader}
-          title={chartInfo.title}
+          title={<Link href={chartInfo.chartPath}>{chartInfo.title}</Link>}
           subheader={chartInfo.shortDescription}
-        />
+        ></CardHeader>
         <CardMedia
           className={classes.media}
           image={chartInfo.thumbnailUrl}
@@ -121,15 +121,6 @@ export const ChartCardComponent: React.FC<Props> = (props: Props) => {
             ))}
           </ul>
         </CardContent>
-        <CardActions className={classes.cardActions}>
-          <Link href={chartInfo.chartPath}>
-            <a className={classes.linkGoChart}>
-              <Typography variant="body1">
-                Ver gráfica y más detalles
-              </Typography>
-            </a>
-          </Link>
-        </CardActions>
       </Card>
     </React.Fragment>
   );
