@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme: Theme) =>
     grid: {
       flexGrow: 1,
     },
+    gridElement: {
+      minWidth: "20rem",
+    },
   })
 );
 
@@ -22,7 +25,7 @@ export const MainChartListComponent: React.FC<Props> = (props: Props) => {
     <React.Fragment>
       <Grid container spacing={3} className={classes.grid}>
         {chartsInfoCollection.map((chartInfo: ChartInfoVm, index) => (
-          <Grid item key={index} xs>
+          <Grid item key={index} xs className={classes.gridElement}>
             <ChartCardComponent chartInfo={chartInfo} />
           </Grid>
         ))}

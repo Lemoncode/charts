@@ -1,8 +1,12 @@
-import { ChartInfoVm, createDefaultSampleChart } from "../model";
+import {
+  ChartInfoVm,
+  createDefaultSampleChart,
+  createSpainPopulationChart,
+} from "../model";
 
 export const mainChartList: ChartInfoVm[] = [
   createDefaultSampleChart(),
-  createDefaultSampleChart(),
+  createSpainPopulationChart(),
   {
     title: "España COVID",
     shortDescription: "Afectados por comunidades 03/2020",
@@ -10,7 +14,7 @@ export const mainChartList: ChartInfoVm[] = [
     thumbnailUrl: "static/images/espana_covid_marzo.png",
     chartPath: "espana-covid-marzo",
     sourceDescription: "Fuente de covid marzo",
-    sourceUrl: "#",
-    tags: ["covid"],
+    sourceUrl: "https://www.google.es", //Replace it
+    tags: ["españa", "covid", "COVID-19"],
   },
 ];
