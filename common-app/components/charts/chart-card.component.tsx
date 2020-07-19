@@ -3,14 +3,11 @@ import Link from "next/link";
 import {
   Card,
   CardContent,
-  CardActions,
-  Button,
   makeStyles,
   Theme,
   createStyles,
   Typography,
   Chip,
-  CardHeader,
   CardMedia,
 } from "@material-ui/core";
 import { ChartInfoVm } from "core/model";
@@ -21,8 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
       // maxWidth: "18.75rem",
       // margin: "2rem",
     },
-    cardHeader: {
-      minHeight: "10rem",
+    headerTitle: {
+      minHeight: "4.5rem",
+    },
+    headerSubtitle: {
+      minHeight: "3.35rem",
+      color: theme.palette.text.secondary,
     },
     media: {
       height: 0,
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: "30",
     },
     source: {
-      minHeight: "4rem",
+      minHeight: "3.9rem",
     },
     sourceLink: {
       marginLeft: "0.5rem",
@@ -84,11 +85,14 @@ export const ChartCardComponent: React.FC<Props> = (props: Props) => {
   return (
     <React.Fragment>
       <Card className={classes.gridCell}>
-        <CardHeader
-          className={classes.cardHeader}
-          title={<Link href={chartInfo.chartPath}>{chartInfo.title}</Link>}
-          subheader={chartInfo.shortDescription}
-        ></CardHeader>
+        <CardContent>
+          <Typography variant="h5" className={classes.headerTitle}>
+            <Link href={chartInfo.chartPath}>{chartInfo.title}</Link>
+          </Typography>
+          <Typography variant="body1" className={classes.headerSubtitle}>
+            {chartInfo.shortDescription}
+          </Typography>
+        </CardContent>
         <CardMedia
           className={classes.media}
           image={chartInfo.thumbnailUrl}
